@@ -3,16 +3,18 @@
   "version": "1.0.0",
   "description": "Training task react+appwrite",
   "main": "main.tsx",
-   "scripts": {
-     "dev": "webpack serve --config webpack.config.js",
-     "build": "webpack --config webpack.config.js",
-     "lint": "eslint .",
-     "preview": "webpack serve --config webpack.config.js --mode production"
-   },
+  "scripts": {
+    "dev": "webpack serve --config webpack.config.js",
+    "build": "webpack --config webpack.config.js",
+    "lint": "eslint .",
+    "preview": "webpack serve --config webpack.config.js --mode production"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "appwrite": "^16.0.2",
+    "dotenv": "^16.4.5",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.27.0"

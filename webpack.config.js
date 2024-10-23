@@ -1,6 +1,10 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const dotenv = require('dotenv');
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
+// import { DefinePlugin } from 'webpack';
+
+dotenv.config();
 
 module.exports = {
   entry: './src/main.tsx',
@@ -14,7 +18,7 @@ module.exports = {
   output: {
     publicPath: 'auto',
     filename: 'bundle.js',
-    path: path.resolve(__dirname, 'public'),
+    path: path.resolve(__dirname, 'build'),
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
@@ -37,5 +41,8 @@ module.exports = {
     new HtmlWebpackPlugin({
       template: './public/index.html',
     }),
+    // new DefinePlugin({
+    //   'process.env.APPWRITE_PROJECT_ID': JSON.stringify(process.env.APPWRITE_PROJECT_ID),
+    // })
   ],
 };
