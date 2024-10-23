@@ -7,7 +7,7 @@ export const appwriteConfig = {
   collectionIdMessages: import.meta.env.APPWRITE_COLLECTION_ID_MESSAGES,
 };
 
-export const client = new Client()
+const client = new Client()
   .setEndpoint(appwriteConfig.url)
   .setProject(appwriteConfig.projectId);
 
