@@ -1,8 +1,8 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const dotenv = require('dotenv');
+const webpack = require('webpack');
 const ModuleFederationPlugin = require('webpack').container.ModuleFederationPlugin;
-// import { DefinePlugin } from 'webpack';
 
 dotenv.config();
 
@@ -46,8 +46,11 @@ module.exports = {
       template: './public/index.html',
       favicon: './public/favicon.ico',
     }),
-    // new DefinePlugin({
-    //   'process.env.APPWRITE_PROJECT_ID': JSON.stringify(process.env.APPWRITE_PROJECT_ID),
-    // })
+    new webpack.DefinePlugin({
+      'process.env.APPWRITE_URL': JSON.stringify(process.env.APPWRITE_URL),
+      'process.env.APPWRITE_PROJECT_ID': JSON.stringify(process.env.APPWRITE_PROJECT_ID),
+      'process.env.APPWRITE_DATABASE_ID': JSON.stringify(process.env.APPWRITE_DATABASE_ID),
+      'process.env.APPWRITE_COLLECTION_ID_MESSAGES': JSON.stringify(process.env.APPWRITE_COLLECTION_ID_MESSAGES),
+    })
   ],
 };

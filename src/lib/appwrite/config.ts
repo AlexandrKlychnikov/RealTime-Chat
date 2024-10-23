@@ -1,10 +1,10 @@
 import { Client, Account, Databases } from 'appwrite';
 
 export const appwriteConfig = {
-  url: import.meta.env.APPWRITE_URL,
-  projectId: import.meta.env.APPWRITE_PROJECT_ID,
-  databaseId: import.meta.env.APPWRITE_DATABASE_ID,
-  collectionIdMessages: import.meta.env.APPWRITE_COLLECTION_ID_MESSAGES,
+  url: process.env.APPWRITE_URL as string,
+  projectId: process.env.APPWRITE_PROJECT_ID as string,
+  databaseId: process.env.APPWRITE_DATABASE_ID as string,
+  collectionIdMessages: process.env.APPWRITE_COLLECTION_ID_MESSAGES as string,
 };
 
 const client = new Client()
