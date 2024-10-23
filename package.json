@@ -1,0 +1,35 @@
+{
+  "name": "realtime-chat",
+  "version": "1.0.0",
+  "description": "Training task react+appwrite",
+  "main": "main.tsx",
+   "scripts": {
+     "dev": "webpack serve --config webpack.config.js",
+     "build": "webpack --config webpack.config.js",
+     "lint": "eslint .",
+     "preview": "webpack serve --config webpack.config.js --mode production"
+   },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.27.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.25.9",
+    "@babel/preset-env": "^7.25.9",
+    "@babel/preset-react": "^7.25.9",
+    "@types/react": "^18.3.12",
+    "@types/react-dom": "^18.3.1",
+    "@types/react-router-dom": "^5.3.3",
+    "babel-loader": "^9.2.1",
+    "html-webpack-plugin": "^5.6.3",
+    "ts-loader": "^9.5.1",
+    "typescript": "^5.6.3",
+    "webpack": "^5.95.0",
+    "webpack-cli": "^5.1.4",
+    "webpack-dev-server": "^5.1.0"
+  }
+}
