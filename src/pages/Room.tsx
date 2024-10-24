@@ -1,12 +1,13 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, FormEvent } from 'react';
 import client, { databases } from '../lib/appwrite/config';
-import { Query } from 'appwrite';
+import { ID, Query } from 'appwrite';
 import { appwriteConfig } from '../lib/appwrite/config';
 
 const Room = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [messageBody, setMessageBody] = useState('');
   const [messages, setMessages] = useState<any[]>([]);
+  const { databaseId, collectionIdMessages: collectionId } = appwriteConfig;
 
   async function getMessages() {
     try {
@@ -16,7 +17,7 @@ const Room = () => {
         [Query.orderDesc('$createdAt'), Query.limit(100)]
       );
 
-      if (!messages) throw Error;
+      if (!response) throw Error;
 
       setMessages(response.documents);
       return true;
@@ -30,7 +31,7 @@ const Room = () => {
     getMessages();
 
     const unsubscribe = client.subscribe(
-      `databases.${appwriteConfig.databaseId}.collections.${appwriteConfig.collectionIdMessages}.documents`,
+      `databases.${databaseId}.collections.${collectionId}.documents`,
       (response: any) => {
         if (
           response.events.includes(
@@ -58,30 +59,67 @@ const Room = () => {
     };
   }, []);
 
-  return (
-    <div>
-      {messages.map((message) => (
-        <div key={message.$id} className={'message__wrapper'}>
-          <div className='message__header'>
-            <p>
-              {message?.username ? (
-                <span> {message?.username}</span>
-              ) : (
-                'Anonymous user'
-              )}
+  let payload = {
+    body: messageBody,
+  };
 
-              <small className='message-timestamp'>
-                {' '}
-                {new Date(message.$createdAt).toLocaleString()}
-              </small>
-            </p>
+  const handleSubmit = async (e: FormEvent) => {
+    e.preventDefault();
+    let response = await databases.createDocument(
+      databaseId,
+      collectionId,
+      ID.unique(),
+      payload
+    );
+
+    setMessageBody('');
+  };
+
+  return (
+    <main className='container'>
+      <div className='room--container'>
+        <form id='message-form' onSubmit={handleSubmit}>
+          <div>
+            <textarea
+              required
+              maxLength={250}
+              placeholder='Say something...'
+              onChange={(e) => {
+                setMessageBody(e.target.value);
+              }}
+              value={messageBody}
+            ></textarea>
           </div>
-          <div className={'message__body'}>
-            <span>{message.body}</span>
+
+          <div className='send-btn__wrapper'>
+            <input className='btn btn_secondary' type='submit' value='Send' />
           </div>
+        </form>
+        <div>
+          {messages.map((message) => (
+            <div key={message.$id} className={'message__wrapper'}>
+              <div className='message__header'>
+                <p>
+                  {message?.username ? (
+                    <span> {message?.username}</span>
+                  ) : (
+                    'Anonymous'
+                  )}
+
+                  <small className='message-timestamp'>
+                    {' '}
+                    {new Date(message.$createdAt).toLocaleString()}
+                  </small>
+                </p>
+              </div>
+              <div className={'message__body'}>
+                <span>{message.body}</span>
+              </div>
+            </div>
+          ))}
         </div>
-      ))}
-    </div>
+      </div>
+    </main>
   );
 };
 

@@ -28,7 +28,73 @@ body{
   color: var(--textColorMain);
 }
 
+.container{
+  max-width: 600px;
+  margin:20px auto;
+}
+
+/* Form Input Styling */
+
+input[type="text"], input[type="password"], input[type="email"], textarea{
+  background: var(--mainBgColor);
+  border: 1px --textColorMain solid;
+  padding: 1rem;
+  border-radius: 3px;
+  width: 100%;
+  color: var(--color-light);
+  outline: none;
+  font-size: 18px;
+  text-shadow: none !important;
+}
+
+/* Button Styling */
+
+.btn{
+  padding: 0.5em 1em;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.btn_lg{
+  padding: 1em 2em;
+}
+
+.btn_main{
+  background-color: rgba(219,26,90,1);
+  color: #fff;
+}
+
+.btn_secondary{
+  background-color: #8db3dd;
+  color: #fff;
+  font-weight: bold;
+}
+
+.btn:hover{
+  opacity: 0.7;
+}
+
+.send-btn__wrapper{
+  display: flex;
+  justify-content: flex-end;
+}
+
+
 /* Room Styling */
+.room-container{
+  padding: 2em;
+  background-color: var(--secondaryBgColor);
+  border-radius: 0 0 10px 10px;
+  border:1px solid var(--borderColor1);
+}
+
+#message-form{
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+}
 
 .message__wrapper{
   display: flex;
