@@ -81,6 +81,16 @@ input[type="text"], input[type="password"], input[type="email"], textarea{
   justify-content: flex-end;
 }
 
+.delete-btn{
+  color:#8db3dd;
+  cursor: pointer;
+  transition: 0.3s;
+  width: 24px;
+}
+
+.delete-btn:hover{
+  color:red;
+}
 
 /* Room Styling */
 .room-container{

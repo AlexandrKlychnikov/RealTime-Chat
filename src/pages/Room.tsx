@@ -2,6 +2,7 @@ import React, { useState, useEffect, FormEvent } from 'react';
 import client, { databases } from '../lib/appwrite/config';
 import { ID, Query } from 'appwrite';
 import { appwriteConfig } from '../lib/appwrite/config';
+import { Trash2 } from 'react-feather';
 
 const Room = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -75,6 +76,10 @@ const Room = () => {
     setMessageBody('');
   };
 
+  const deleteMessage = async (id: string) => {
+    await databases.deleteDocument(databaseId, collectionId, id);
+  };
+
   return (
     <main className='container'>
       <div className='room--container'>
@@ -111,6 +116,12 @@ const Room = () => {
                     {new Date(message.$createdAt).toLocaleString()}
                   </small>
                 </p>
+                <Trash2
+                  className='delete-btn'
+                  onClick={() => {
+                    deleteMessage(message.$id);
+                  }}
+                />
               </div>
               <div className={'message__body'}>
                 <span>{message.body}</span>
