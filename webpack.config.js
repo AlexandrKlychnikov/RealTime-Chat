@@ -51,6 +51,18 @@ module.exports = {
       'process.env.APPWRITE_PROJECT_ID': JSON.stringify(process.env.APPWRITE_PROJECT_ID),
       'process.env.APPWRITE_DATABASE_ID': JSON.stringify(process.env.APPWRITE_DATABASE_ID),
       'process.env.APPWRITE_COLLECTION_ID_MESSAGES': JSON.stringify(process.env.APPWRITE_COLLECTION_ID_MESSAGES),
-    })
+    }),
+    new ModuleFederationPlugin({
+      name: 'roomApp',
+      filename: 'remoteEntry.js',
+      exposes: {
+        './Room': './src/pages/Room.tsx',
+      },
+      shared: {
+        react: { singleton: true, eager: true, requiredVersion: '^18.3.1' },
+        'react-dom': { singleton: true, eager: true, requiredVersion: '^18.3.1' },
+        'react-router-dom': { singleton: true, eager: true, requiredVersion: '^6.27.1' },
+      },
+    }),
   ],
 };

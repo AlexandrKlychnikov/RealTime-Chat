@@ -1,6 +1,6 @@
 import React, { useState, useEffect, FormEvent } from 'react';
 import client, { databases } from '../lib/appwrite/config';
-import { ID, Query } from 'appwrite';
+import { ID, Query, RealtimeResponseEvent } from 'appwrite';
 import { appwriteConfig } from '../lib/appwrite/config';
 import { Trash2 } from 'react-feather';
 
@@ -33,7 +33,7 @@ const Room = () => {
 
     const unsubscribe = client.subscribe(
       `databases.${databaseId}.collections.${collectionId}.documents`,
-      (response: any) => {
+      (response: RealtimeResponseEvent<any>) => {
         if (
           response.events.includes(
             'databases.*.collections.*.documents.*.create'
